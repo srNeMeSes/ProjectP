@@ -57,6 +57,9 @@ jobs:
             flutter config --no-analytics
             flet build web --base-url ${GITHUB_REPOSITORY#*/} --route-url-strategy hash
 
+    - name: Copy Assets
+      run: cp -r assets build/web/
+
     - name: Upload Artifact
       uses: actions/upload-pages-artifact@v3
       with:
@@ -88,4 +91,3 @@ jobs:
         uses: actions/deploy-pages@v4.0.5
         with:
           artifact_name: web-build-artifact
-        
