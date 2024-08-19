@@ -8,6 +8,8 @@ def main(page: ft.Page):
     page.bgcolor = "#EBEBEB"#"#282C34"
     page.padding = 0
     page.scroll = "always"
+    page.splash = None
+
 
 
 
@@ -280,7 +282,7 @@ def main(page: ft.Page):
         visible=True,
         expand=True,
 
-        bgcolor="#EBEBEB",
+        bgcolor="#282C34",
         # border=ft.border.all(1, color='black'),
         border_radius=ft.border_radius.all(7),
         # padding=5,  # preenchimento
@@ -365,7 +367,10 @@ def main(page: ft.Page):
             )
         )
         if page.route == '/facebook/login':
-            Tela2.bgcolor = "#282C34"
+            print(page.route)
+            Tela2.bgcolor = "#282C34",
+            page.bgcolor = "#282C34",
+
             t2_image.visible = False
             t2_icone_facebook.visible = True
             t2_texto_login.color = "white"
@@ -374,6 +379,7 @@ def main(page: ft.Page):
             t2_campo_email.value = ""
 
             t2_box_senha.controls[1].color = "white"
+
 
             t2_botao_avancar.color = "white"
             t2_botao_avancar.bgcolor = "#0866FF"
@@ -405,9 +411,10 @@ def main(page: ft.Page):
             t2_senha_conta_facebook.visible = True
 
             page.update()
+
             page.views.append(
                 ft.View(
-                    '/store',
+                    '/facebook/login',
                     [
 
                         Tela2
@@ -415,9 +422,11 @@ def main(page: ft.Page):
                 )
 
             )
+            page.update()
+
 
         elif page.route == '/google/login':
-            Tela2.bgcolor = "White"#"#EBEBEB"
+            Tela2.bgcolor = "White"
             t2_image.visible = True
             t2_icone_facebook.visible = False
             t2_texto_login.color = "#3B3B3B"
@@ -471,9 +480,10 @@ def main(page: ft.Page):
                 )
 
             )
+            page.update()
 
         elif page.route == "/ofertas":
-            page.update()
+
             page.views.append(
 
                 ft.View(
@@ -486,7 +496,7 @@ def main(page: ft.Page):
                 )
 
             )
-
+            page.update()
 
 
     def ver_pop(e):
@@ -501,15 +511,25 @@ def main(page: ft.Page):
 
     page.add(
         ft.Row([Tela1], alignment=ft.MainAxisAlignment.CENTER),
-        ft.Row([Tela2])
+
     )
-    page.update()
+
 
 
      # Ao mudar rota
     page.on_route_change = mudar_rota
+
     page.on_view_pop = ver_pop
     page.go(page.route)
+    page.update()
+
+
+
+
+
+
+
+ft.app(target=main, assets_dir="assets", view=ft.WEB_BROWSER)
 
 
 
@@ -518,7 +538,11 @@ def main(page: ft.Page):
 
 
 
-ft.app(target=main, assets_dir="assets")
+
+
+
+
+
 
 
 
